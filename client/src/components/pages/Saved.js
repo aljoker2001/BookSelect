@@ -4,7 +4,7 @@ import Wrapper from './../Wrapper/index.js'
 function Saved() {
     return (
       <Wrapper>
-        <h1 className='jumbotron text-center'>Saved Books</h1>
+        <h2 className='jumbotron text-center'>Saved Books</h2>
       </Wrapper>
     );
   }

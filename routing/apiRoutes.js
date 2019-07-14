@@ -29,7 +29,7 @@ module.exports = function (app) {
       // req.body hosts is equal to the JSON post sent from the user
       // This works because of the body parsing middleware
         var newBook = req.body
-        console.log('new friend:', newBook)
+        console.log('new book:', newBook)
         db.books.insert(newBook, function (err, data) {
           if (err) {
             console.log(err)

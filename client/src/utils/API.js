@@ -1,4 +1,8 @@
+// import APIKEY from './keys.js'
+const BASEURL = 'https://www.googleapis.com/books/v1/volumes?q='
+
 export default {
-    api: function(query) {
-        return fetch('/api/books')
+    search: function (query) {
+        return fetch(BASEURL + query)
+    }
 }

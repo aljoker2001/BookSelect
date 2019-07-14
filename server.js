@@ -1,7 +1,11 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const APIKEY = process.env.APIKEY
+
+console.log('LoG', process.env.APIKEY)
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,4 +25,5 @@ app.get("*", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
+  console.log('key', `${APIKEY}`)
 });
