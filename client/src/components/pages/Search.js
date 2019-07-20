@@ -7,8 +7,11 @@ import SearchButton from './../SearchButton/index.js'
 
 class Search extends React.Component {
     state = {
-        result: {},
+        results: [],
         search: ''
+    }
+    componentDidMount() {
+        this.searchBook('Hyperion')
     }
     searchBook = (query) => {
         console.log(query)
@@ -16,6 +19,7 @@ class Search extends React.Component {
             .then(results => results.json())
             .then(res => {
                 console.log('results', res.items)
+                this.setState({results: res.items})
             })
             .catch(err => console.log(err))
     }
@@ -30,24 +34,13 @@ class Search extends React.Component {
     handleFormSubmit = (event) => {
         event.preventDefault();
         this.searchBook(this.state.search);
+        console.log('submit results', this.state.results)
     };
     renderBook = () => {
-        let { Title, Author, Description, Image, Link } = this.state.result
-        if (Title) {
-            return (
-                <BookDetail
-                    title={Title}
-                    image={Image}
-                    description={Description}
-                    author={Author}
-                    link={Link}
-                />
-            )
-        } else {
-            return (<h3>No Results to Display</h3>)
-        }
+        console.log('render book', this.state.result.items)
     }
     render() {
+        console.log('render', this.state.results)
         return (
             <Wrapper>
                 <h2 className='jumbotron text-center'>Search for a Book</h2>
@@ -58,7 +51,7 @@ class Search extends React.Component {
                 <SearchButton
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                {this.renderBook()}
+                <BookDetail results={this.state.results} />
             </Wrapper>
         );
     }
