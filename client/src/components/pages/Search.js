@@ -24,6 +24,7 @@ class Search extends React.Component {
             .catch(err => console.log(err))
     }
     handleInputChange = (event) => {
+        event.preventDefault()
         const value = event.target.value;
         const name = event.target.name;
         this.setState({
@@ -36,9 +37,6 @@ class Search extends React.Component {
         this.searchBook(this.state.search);
         console.log('submit results', this.state.results)
     };
-    renderBook = () => {
-        console.log('render book', this.state.result.items)
-    }
     render() {
         console.log('render', this.state.results)
         return (
@@ -47,10 +45,11 @@ class Search extends React.Component {
                 <SearchBox
                     handleInputChange={this.handleInputChange}
                     search={this.state.search}
-                />
-                <SearchButton
                     handleFormSubmit={this.handleFormSubmit}
                 />
+                {/* <SearchButton
+                    handleFormSubmit={this.handleFormSubmit}
+                /> */}
                 <BookDetail results={this.state.results} />
             </Wrapper>
         );
