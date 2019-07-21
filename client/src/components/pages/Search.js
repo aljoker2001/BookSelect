@@ -3,7 +3,6 @@ import Wrapper from './../Wrapper/index.js'
 import API from './../../utils/API.js'
 import BookDetail from './../BookDetail.js'
 import SearchBox from './../SearchBox/index.js'
-import SearchButton from './../SearchButton/index.js'
 
 class Search extends React.Component {
     state = {
@@ -22,6 +21,24 @@ class Search extends React.Component {
                 this.setState({results: res.items})
             })
             .catch(err => console.log(err))
+    }
+    saveBook = (event) => {
+        event.preventDefault()
+        console.log(this.state.results)
+        let saved = {}
+        for (let book of this.state.results) {
+            if (event.target.id === book.id) {
+                saved = book
+            }
+        }
+        console.log('saved book', saved)
+        fetch('/api/books', {
+            method: 'POST',
+            body: JSON.stringify(saved),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
     }
     handleInputChange = (event) => {
         event.preventDefault()
@@ -50,7 +67,10 @@ class Search extends React.Component {
                 {/* <SearchButton
                     handleFormSubmit={this.handleFormSubmit}
                 /> */}
-                <BookDetail results={this.state.results} />
+                <BookDetail 
+                results={this.state.results}
+                saveBook={this.saveBook}
+                />
             </Wrapper>
         );
     }
