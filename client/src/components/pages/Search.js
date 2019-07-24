@@ -18,18 +18,19 @@ class Search extends React.Component {
             .then(results => results.json())
             .then(res => {
                 console.log('results', res.items)
-                this.setState({results: res.items})
+                this.setState({ results: res.items })
             })
             .catch(err => console.log(err))
     }
     saveBook = (event) => {
-        event.preventDefault()
-        console.log(this.state.results)
+        event.persist()
+        console.log(event.target)
         let saved = {}
         for (let book of this.state.results) {
             if (event.target.id === book.id) {
                 saved = book
             }
+        saved.saved = true
         }
         console.log('saved book', saved)
         fetch('/api/books', {
@@ -39,6 +40,12 @@ class Search extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
+            .then(results => results.json())
+            .then(data => {
+                alert('Book Saved')
+                event.target.disabled = true
+                event.target.innerText = 'Saved'
+            })
     }
     handleInputChange = (event) => {
         event.preventDefault()
@@ -67,9 +74,9 @@ class Search extends React.Component {
                 {/* <SearchButton
                     handleFormSubmit={this.handleFormSubmit}
                 /> */}
-                <BookDetail 
-                results={this.state.results}
-                saveBook={this.saveBook}
+                <BookDetail
+                    results={this.state.results}
+                    saveBook={this.saveBook}
                 />
             </Wrapper>
         );

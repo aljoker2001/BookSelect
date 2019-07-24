@@ -10,7 +10,7 @@ const BookDetail = (props) => {
                         <h2 className='col-10'>{result.volumeInfo.title}</h2>
                         <div>
                             <button><a href={result.volumeInfo.infoLink}><strong>Link</strong></a></button>
-                            <button id={result.id} onClick={props.saveBook}>Save</button>
+                            <button id={result.id} onClick={props.saveBook ? props.saveBook : props.removeBook}>{props.saveBook ? 'Save' : 'Remove'}</button>
                         </div>
                     </div>
                     <img alt={result.volumeInfo.title} className="img-fluid" src={result.volumeInfo.imageLinks !== undefined ? result.volumeInfo.imageLinks.thumbnail : '#'} />
