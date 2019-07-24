@@ -8,7 +8,6 @@ class Saved extends React.Component {
   }
   componentDidMount() {
     this.getBooks()
-    // console.log('saved results', this.state.results)
   }
   getBooks = () => {
     fetch('/api/books')
@@ -40,7 +39,10 @@ class Saved extends React.Component {
             }
         })
             .then(results => results.json())
-            .then(data => console.log('data', data))
+            .then(data => {
+              alert('Book removed')
+              this.getBooks()
+            })
             .catch(err => console.log(err))
   }
   render() {

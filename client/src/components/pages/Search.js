@@ -9,9 +9,6 @@ class Search extends React.Component {
         results: [],
         search: ''
     }
-    componentDidMount() {
-        this.searchBook('Hyperion')
-    }
     searchBook = (query) => {
         console.log(query)
         API.search(query)
@@ -71,9 +68,6 @@ class Search extends React.Component {
                     search={this.state.search}
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                {/* <SearchButton
-                    handleFormSubmit={this.handleFormSubmit}
-                /> */}
                 <BookDetail
                     results={this.state.results}
                     saveBook={this.saveBook}
